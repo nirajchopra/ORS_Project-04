@@ -393,7 +393,7 @@ public class MarksheetModel {
 		StringBuffer sql = new StringBuffer(
 				"SELECT ID,ROLL_NO,NAME,PHYSICS,CHEMISTRY,MATHS,(PHYSICS+CHEMISTRY+MATHS) as total from st_marksheet ORDER BY TOTAL DESC");
 
-		if (pageSize > 0) {
+		if (pageSize > 0) { 
 			pageNo = (pageNo - 1) * pageSize;
 			sql.append(" limit " + pageNo + "," + pageSize);
 		}

@@ -60,7 +60,7 @@ public class FrontControler implements Filter {
 	}
 
 	/*
-	 * 
+	 
 	 * (non-Javadoc)
 	 * 
 	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)

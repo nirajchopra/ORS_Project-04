@@ -41,7 +41,8 @@
 				List rlist = (List) request.getAttribute("RoleList");
 
 				List ulist = (List) request.getAttribute("LoginId");
-				
+
+				// List ulist = (List) request.getAttribute("FirstName");
 
 				int next = DataUtility.getInt(request.getAttribute("nextlist").toString());
 			%>
@@ -61,7 +62,8 @@
 				<tr>
 					<th></th>
 					<td align="center"><label>FirstName</font> :
-					</label> <%=HTMLUtility.getList("firstName", String.valueOf(bean.getFirstName()), ulist)%>
+					</label> <input type="text" name="firstName" placeholder="Enter First Name"
+						value="<%=ServletUtility.getParameter("firstName", request)%>">
 
 						<label></font> </label> <%-- <%=HTMLUtility.getList("roleid", String.valueOf(bean.getRoleId()), rlist) %> --%>
 
@@ -69,7 +71,7 @@
 					</label> <input type="text" name="loginid" placeholder="Enter Login-Id"
 						value="<%=ServletUtility.getParameter("login", request)%>">
 						&emsp; <label>Role</font> :
-					</label> <%=HTMLUtility.getList("roleid", String.valueOf(bean.getRoleId()), rlist) %>
+					</label> <%=HTMLUtility.getList("roleid", String.valueOf(bean.getRoleId()), rlist)%>
 						&nbsp; <%-- <%=HTMLUtility.getList("loginid", String.valueOf(bean.getRoleId()), ulist)%>
  --%> &nbsp; <input type="submit" name="operation"
 						value="<%=UserListCtl.OP_SEARCH%>"> &nbsp; <input
@@ -104,7 +106,6 @@
 							RoleBean rolebean = new RoleBean();
 							rolebean = model.findByPK(bean.getRoleId());
 				%>
-
 
 				<tr align="center">
 					<td><input type="checkbox" class="checkbox" name="ids"

@@ -82,11 +82,11 @@
 					href="<%=ORSView.FACULTY_CTL%>">Add Faculty</b></a> | <a
 					href="<%=ORSView.FACULTY_LIST_CTL%>">Faculty List</b></a> | <a
 					href="<%=ORSView.TIMETABLE_CTL%>">Add TimeTable</b></a> | <a
-					href="<%=ORSView.TIMETABLE_LIST_CTL%>">TimeTable List</b></a> | <a
-					<%-- href="<%=ORSView.PRODUCT_CTL%>">Add Customer</a> | <a
+					href="<%=ORSView.TIMETABLE_LIST_CTL%>">TimeTable List</b></a> <%-- | <a
+					href="<%=ORSView.PRODUCT_CTL%>">Add Customer</a> | <a
 					href="<%=ORSView.PRODUCT_LIST_CTL%>">Product List</a> |
 					<a href="<%=ORSView.VEHICLE_CTL%>">Vehicle Add</a> | 
-					<a href="<%=ORSView.VEHICLE_LIST_CTL%>">Vehicle List</a> |  --%><a
+					<a href="<%=ORSView.VEHICLE_LIST_CTL%>">Vehicle List</a>  --%>| <a
 					target="blank" href="<%=ORSView.JAVA_DOC_VIEW%>">Java Doc</b></a> | <%
  	}
  %> <%

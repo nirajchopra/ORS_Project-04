@@ -1,4 +1,3 @@
-
 <%@page import="com.rays.pro4.Bean.RoleBean"%>
 <%@page import="com.rays.pro4.Bean.UserBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,7 +11,8 @@
 </head>
 <body>
 	<form action="<%=ORSView.WELCOME_CTL%>">
-	<%@ include file="Header.jsp"%>
+		<%@ include file="Header.jsp"%>
+		<br>
 		<h1 align="Center">
 			<font size="10px" color="red">Welcome to ORS </font>
 		</h1>
@@ -35,6 +35,6 @@
 
 	</form>
 
-	<%@ include file="Footer.jsp"%> 
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

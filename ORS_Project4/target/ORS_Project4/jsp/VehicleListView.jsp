@@ -1,155 +1,158 @@
+<%@page import="com.rays.pro4.controller.VehicleCtl"%>
+<%@page import="com.rays.pro4.controller.ProductCtl"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.List"%>
 <%@page import="com.rays.pro4.Util.HTMLUtility"%>
 <%@page import="com.rays.pro4.Util.DataUtility"%>
 <%@page import="com.rays.pro4.Util.ServletUtility"%>
-<%@page import="com.rays.pro4.Bean.VehicleBean"%>
-<%@ page import="com.rays.pro4.controller.VehicleListCtl" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+
 <html>
 <head>
 <link rel="icon" type="image/png"
-    href="<%= ORSView.APP_CONTEXT %>/img/logo.png" sizes="16*16" />
+	href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16*16" />
+<title>Add Vehicle</title>
 
-<title>Vehicle List</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-<script src="<%= ORSView.APP_CONTEXT %>/js/jquery.min.js"></script>
-<script src="<%= ORSView.APP_CONTEXT %>/js/Checkbox11.js"></script>
-
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-    $(function() {
-        $("#udate").datepicker({
-            changeMonth : true,
-            changeYear : true,
-            yearRange : '1980:2002',
-        });
-    });
+	$(function() {
+		$("#udatee").datepicker({
+			changeMonth : true,
+			changeYear : true,
+			yearRange : '1980:2020',
+		});
+	});
 </script>
-
-</head>
 <body>
-    <%@ include file="Header.jsp" %>
+	<jsp:useBean id="bean" class="com.rays.pro4.Bean.VehicleBean"
+		scope="request"></jsp:useBean>
+	<%@ include file="Header.jsp"%>
 
-    <form action="<%= ORSView.VEHICLE_LIST_CTL %>" method="post">
+	<center>
 
-        <center>
-            <div align="center">
-                <h1>Vehicle List</h1>
-                <h3>
-                    <font color="red"><%= ServletUtility.getErrorMessage(request) %></font>
-                    <font color="green"><%= ServletUtility.getSuccessMessage(request) %></font>
-                </h3>
-            </div>
+		<form action="<%=ORSView.VEHICLE_CTL%>" method="post">
 
-            <%
-                int next = DataUtility.getInt(request.getAttribute("nextlist").toString());
-                List<VehicleBean> proList = (List<VehicleBean>) request.getAttribute("proList");
-            %>
+			<div align="center">
+				<h1>
 
-            <%
-                int pageNo = ServletUtility.getPageNo(request);
-                int pageSize = ServletUtility.getPageSize(request);
-                int index = ((pageNo - 1) * pageSize) + 1;
+					<%
+						if (bean != null && bean.getId() > 0) {
+					%>
+					<tr>
+						<th><font size="5px"> Update Vehicle </font></th>
+					</tr>
+					<%
+						} else {
+					%>
+					<tr>
+						<th><font size="5px"> Add Vehicle </font></th>
+					</tr>
+					<%
+						}
+					%>
+				</h1>
 
-                List<VehicleBean> list = (List<VehicleBean>) ServletUtility.getList(request);
-                Iterator<VehicleBean> it = list.iterator();
+				<h3>
+					<font color="red"> <%=ServletUtility.getErrorMessage(request)%></font>
+					<font color="green"> <%=ServletUtility.getSuccessMessage(request)%></font>
+				</h3>
 
-                if (list.size() != 0) {
-            %>
-            <table width="100%" align="center">
-                <tr>
-                    <th></th>
-                    <td align="center"><label>Number</label>
-                        <input type="text" name="number"
-                            placeholder="Enter Number"
-                            value="<%= ServletUtility.getParameter("number", request) %>">
-                        &emsp; <label>PurchaseDate</font> :
-					</label> <%=HTMLUtility.getList("proList", String.valueOf(bean.getPurchaseDate()), proList)%>
+			</div>
+
+			<input type="hidden" name="id" value="<%=bean.getId()%>">
+
+			<table>
+				<tr>
+					<th align="left">Number <span style="color: red">*</span> :
+					</th>
+					<td><input type="text" name="number"
+						placeholder="Enter number" size="26"
+						value="<%=DataUtility.getStringData(bean.getNumber())%>"></td>
+					<td style="position: fixed"><font color="red"><%=ServletUtility.getErrorMessage("number", request)%></font></td>
+
+				</tr>
+
+				<tr>
+					<th style="padding: 3px"></th>
+				</tr>
+
+				<tr>
+					<th align="left">Purchase Date <span style="color: red">*</span>
+						:
+					</th>
+					<td><input type="text" name="purchaseDate"
+						placeholder="Enter Purchase Date" size="26" readonly="readonly"
+						id="udatee"
+						value="<%=DataUtility.getStringData(bean.getPurchaseDate())%>">
+					</td>
+					<td style="position: fixed"><font color="red"> <%=ServletUtility.getErrorMessage("purchaseDate", request)%></font></td>
+				</tr>
+				<tr>
+					<th style="padding: 3px"></th>
+				</tr>
+
+				<tr>
+					<th align="left">Insurance Amount<span style="color: red">*</span>
+						:
+					</th>
+					<td><input type="text" name="insuranceAmount"
+						placeholder="Enter Insurance Amount" size="26"
+						value="<%=DataUtility.getStringData(bean.getInsuranceAmount())%>"></td>
+					<td style="position: fixed"><font color="red"> <%=ServletUtility.getErrorMessage("insuranceAmount", request)%></font></td>
+				</tr>
+				<tr>
+				<tr>
+					<th style="padding: 3px"></th>
+				</tr>
+				<tr>
+					<th align="left">Colour <span style="color: red">*</span>
+
+					</th>
+					<td><input type="text" name="colour"
+						placeholder="Enter Colour" size="26"
+						value="<%=DataUtility.getStringData(bean.getColour())%>">
+					</td>
+					<td style="position: fixed"><font color="red"> <%=ServletUtility.getErrorMessage("colour", request)%></font></td>
+				</tr>
+				<tr>
+					<th style="padding: 3px"></th>
+				</tr>
+
+
+				<tr>
+					<th></th>
+					<%
+						if (bean.getId() > 0) {
+					%>
+					<td colspan="2">&nbsp; &emsp; <input type="submit"
+						name="operation" value="<%=VehicleCtl.OP_UPDATE%>"> &nbsp;
 						&nbsp; <input type="submit" name="operation"
-						value="<%=VehicleListCtl.OP_SEARCH%>"> &nbsp; <input
-						type="submit" name="operation"
-						value="<%=VehicleListCtl.OP_RESET%>"></td>
-                </tr>
-            </table>
-            <br>
+						value="<%=VehicleCtl.OP_CANCEL%>"></td>
 
-            <table border="1" width="100%" align="center" cellpadding="6px"
-                cellspacing=".2">
-                <tr style="background: skyblue">
-                    <th><input type="checkbox" id="select_all" name="select">Select
-                        All</th>
-                    <th>S.No.</th>
-                    <th>Number</th>
-                    <th>Purchase Date</th>
-                    <th>Insurance Amount</th>
-                    <th>Colour</th>
-                    <th>Edit</th>
-                </tr>
+					<%
+						} else {
+					%>
 
-                <%
-                    while (it.hasNext()) {
-                        VehicleBean bean = it.next();
-                %>
-                <tr align="center">
-                    <td><input type="checkbox" class="checkbox" name="ids"
-                        value="<%= bean.getId() %>"></td>
-                    <td><%= index++ %></td>
-                    <td><%= bean.getNumber() %></td>
-                    <td><%= bean.getPurchaseDate() %></td>
-                    <td><%= bean.getInsuranceAmount() %></td>
-                    <td><%= bean.getColour() %></td>
-                    <td><a href="ProductCtl?id=<%= bean.getId() %>">Edit</a></td>
-                </tr>
-                <%
-                    }
-                %>
-            </table>
+					<td colspan="2">&nbsp; &emsp; <input type="submit"
+						name="operation" value="<%=VehicleCtl.OP_SAVE%>"> &nbsp;
+						&nbsp; <input type="submit" name="operation"
+						value="<%=VehicleCtl.OP_RESET%>"></td>
 
-            <table width="100%">
-                <tr>
-                    <th></th>
-                    <%
-                        if (pageNo == 1) {
-                    %>
-                    <td><input type="submit" name="operation" disabled="disabled"
-                        value="<%= VehicleListCtl.OP_PREVIOUS %>"></td>
-                    <%
-                        } else {
-                    %>
-                    <td><input type="submit" name="operation"
-                        value="<%= VehicleListCtl.OP_PREVIOUS %>"></td>
-                    <%
-                        }
-                    %>
-                    <td><input type="submit" name="operation"
-                        value="<%= VehicleListCtl.OP_DELETE %>"></td>
-                    <td><input type="submit" name="operation"
-                        value="<%= VehicleListCtl.OP_NEW %>"></td>
-                    <td align="right"><input type="submit" name="operation"
-                        value="<%= VehicleListCtl.OP_NEXT %>"
-                        <%=(list.size() < pageSize || next == 0) ? "disabled" : ""%>></td>
-                </tr>
-            </table>
-            <%
-                }
-                if (list.size() == 0) {
-            %>
-            <td align="center"><input type="submit" name="operation"
-                value="<%= VehicleListCtl.OP_BACK %>"></td>
-            <%
-                }
-            %>
-            <input type="hidden" name="pageNo" value="<%= pageNo %>"> 
-            <input type="hidden" name="pageSize" value="<%= pageSize %>">
-        </center>
-    </form>
-    <%@ include file="Footer.jsp" %>
+					<%
+						}
+					%>
+				</tr>
+			</table>
+		</form>
+	</center>
+
+	<%@ include file="Footer.jsp"%>
 </body>
 </html>

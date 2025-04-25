@@ -12,6 +12,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.rays.pro4.Exception.ApplicationException;
+
 /**
  * Email Utility provides Email Services.
  * 
@@ -20,7 +21,7 @@ import com.rays.pro4.Exception.ApplicationException;
  */
 public class EmailUtility {
 
-	/**
+    /**
      * Create Resource Bundle to read properties file
      */
     static ResourceBundle rb = ResourceBundle
@@ -63,7 +64,7 @@ public class EmailUtility {
     static {
         props.put("mail.smtp.host", SMTP_HOST_NAME);
         props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
         props.put("mail.smtp.auth", "true");
         props.put("mail.debug", "true");
         props.put("mail.smtp.port", SMTP_PORT);
@@ -76,7 +77,7 @@ public class EmailUtility {
      * Sends an Email
      *
      * @param emailMessageDTO
-     *            : Email message
+     *                        : Email message
      * @throws ApplicationException
      */
     public static void sendMail(EmailMessage emailMessageDTO)
@@ -104,7 +105,7 @@ public class EmailUtility {
             // Set TO addresses
             String[] emailIds = new String[0];
 
-            if (emailMessageDTO.getTo() != null) { 
+            if (emailMessageDTO.getTo() != null) {
                 emailIds = emailMessageDTO.getTo().split(",");
             }
 
@@ -157,12 +158,12 @@ public class EmailUtility {
 
             // Set message MIME type
             switch (emailMessageDTO.getMessageType()) {
-            case EmailMessage.HTML_MSG:
-                msg.setContent(emailMessageDTO.getMessage(), "text/html");
-                break;
-            case EmailMessage.TEXT_MSG:
-                msg.setContent(emailMessageDTO.getMessage(), "text/plain");
-                break;
+                case EmailMessage.HTML_MSG:
+                    msg.setContent(emailMessageDTO.getMessage(), "text/html");
+                    break;
+                case EmailMessage.TEXT_MSG:
+                    msg.setContent(emailMessageDTO.getMessage(), "text/plain");
+                    break;
 
             }
 
@@ -170,8 +171,8 @@ public class EmailUtility {
             Transport.send(msg);
 
         } catch (Exception ex) {
-//            throw new ApplicationException("Email " + ex.getMessage());
+            // throw new ApplicationException("Email " + ex.getMessage());
         }
     }
-	
+
 }

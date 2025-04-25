@@ -50,8 +50,8 @@ public class UserListCtl extends BaseCtl {
 			List ulist = umodel.list(0, 0);
 
 			request.setAttribute("RoleList", rlist);
-			/* request.setAttribute("LoginId", ulist); */
-			request.setAttribute("FirstName", ulist);
+			request.setAttribute("LoginId", ulist);
+		//	request.setAttribute("FirstName", ulist);
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();
@@ -195,7 +195,7 @@ public class UserListCtl extends BaseCtl {
 			request.setAttribute("nextlist", nextList.size());
 
 		} catch (ApplicationException e) {
-			log.error(e);
+			log.error(e); 
 			ServletUtility.handleException(e, request, response);
 			return;
 		}
